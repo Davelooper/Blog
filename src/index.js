@@ -6,6 +6,7 @@ import {
     RouterProvider,
 } from "react-router-dom"
 import Root from "./routes/root";
+import Test from "./routes/test";
 import { ChakraProvider } from "@chakra-ui/provider";
 
 
@@ -14,6 +15,10 @@ const router = createBrowserRouter([
         path: "/",
         element: <Root />,
     },
+    {
+        path: "/test",
+        element: <Test />
+    }
 ]);
 
 ReactDOM.createRoot(document.getElementById("root")).render(
