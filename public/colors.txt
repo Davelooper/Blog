@@ -1,0 +1,5 @@
+Gris clair : #D9D9D9
+Jaune clair : #D9CB84
+Brun foncé : #593A27
+Brun clair : #A67D65
+Noir : #0D0D0D
