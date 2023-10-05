@@ -6,7 +6,7 @@ import {
     RouterProvider,
 } from "react-router-dom"
 import Root from "./routes/root";
-import Test from "./routes/test";
+import Post from "./routes/post";
 import { ChakraProvider } from "@chakra-ui/provider";
 import { extendTheme } from '@chakra-ui/react';
 
@@ -17,8 +17,8 @@ const router = createBrowserRouter([
         element: <Root />,
     },
     {
-        path: "/test",
-        element: <Test />
+        path: "/post/:id",
+        element: <Post />
     }
 ]);
 

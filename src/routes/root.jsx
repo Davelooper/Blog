@@ -45,14 +45,6 @@ function Root() {
 
     }, [users])
 
-    useEffect(() => {
-        console.log("posts", posts)
-        console.log("users", users);
-        if (users) {
-            console.log(users[0])
-        }
-    }, [posts, users])
-
     return (
         <Container
             bg="primary"
@@ -64,14 +56,14 @@ function Root() {
         >
             {posts.length !== 0 && users.length !== 0 ? (
                 posts.map((post) => {
-
                     const author = users.find(user => user.id === post.userId)
 
                     return <PreviewPost
-                        key={post.id}
+                        key={`post-${post.id}`}
                         author={author}
                         title={post.title}
                         content={post.body}
+                        id={post.id}
                     />})
             ) : (
                 <Box

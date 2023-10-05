@@ -1,6 +1,9 @@
 import { Box } from '@chakra-ui/layout';
+import { useParams } from 'react-router-dom';
 
-function Test() {
+function Post() {
+    const id = useParams();
+    console.log("id", id)
     return (
         <Box bg='' w='100%' p={4} color='black'>
             This is the Boxolalar
@@ -8,4 +11,4 @@ function Test() {
     );
 }
 
-export default Test;
+export default Post;

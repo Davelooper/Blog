@@ -1,23 +1,24 @@
-import { Box, Center, Container, Vstack } from '@chakra-ui/layout';
-import { useEffect, useState } from 'react';
-import { fetchPosts, fetchUsers } from '../api/posts';
+import { Box } from '@chakra-ui/layout';
 import { Card, CardHeader, Heading, CardBody, Stack, StackDivider, Text, defineStyle, useColorModeValue } from '@chakra-ui/react';
+import { useNavigate } from 'react-router-dom';
 
+function PreviewPost({ id, author = "Unknown", title = "The title", content = "soiejfpaosefijpaoeifjapeofijapeofiajzpeofiazjpefoiazejfpoaziefjpaozeifjpazoeifj opefaijepfoaiezjfpo ijefzpao fiazjep ofiaj" }) {
+    const navigate = useNavigate()
 
-function PreviewPost({ author = "Unknown", title = "The title", content = "soiejfpaosefijpaoeifjapeofijapeofiajzpeofiazjpefoiazejfpoaziefjpaozeifjpazoeifj opefaijepfoaiezjfpo ijefzpao fiazjep ofiaj" }) {
-   
-    useEffect(() => {
-        console.log("author", author)
-    })
+    function handleClick() {
 
-    // const bgColor = useColorModeValue("tertiary1", "tertiary2");
-
+        if (Number.isInteger(id)) {
+            return navigate(`/post/${id}`)
+        } else {
+            console.error("L'id de ce poste manque.")
+        }
+    }
 
     return (
-        
-        <Card 
-            bg="tertiary2" 
-            mb={8} 
+
+        <Card
+            bg="tertiary2"
+            mb={8}
             w={700}
             h={300}
             _hover={{
@@ -28,7 +29,8 @@ function PreviewPost({ author = "Unknown", title = "The title", content = "soiej
                 height: "350px",
                 transition: "background-color 0.3s ease-in-out, color 0.3s ease-in-out, width 0.2s ease-in-out, height 0.2s ease-in-out"
             }}
-            >
+            onClick={handleClick}
+        >
             <CardHeader>
                 <Heading size='md'>{title}</Heading>
             </CardHeader>
