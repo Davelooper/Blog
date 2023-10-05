@@ -6,8 +6,8 @@ export async function fetchPosts() {
         const response = await fetch(`${apiUrl}/posts`);
         const data = await response.json();
         return data;
-      } catch (error) {
+    } catch (error) {
         console.error('Erreur lors de la récupération des utilisateurs:', error);
         throw error;
-      }
+    }
 }
