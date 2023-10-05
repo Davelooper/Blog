@@ -1,12 +1,10 @@
-import { Box } from '@chakra-ui/layout';
+import { Box, Center, Container, Vstack } from '@chakra-ui/layout';
 import { useEffect, useState } from 'react';
 import { fetchPosts } from '../api/posts';
+import PreviewPost from '../components/PreviewPost';
 
 function Root() {
     const [posts, setPosts] = useState([])
-    // console.log("plopiplop")
-
-
 
     useEffect(() => {
 
@@ -27,13 +25,21 @@ function Root() {
     }, [posts])
 
     useEffect(() => {
-        console.log("posts",posts)
+        console.log("posts", posts)
     }, [posts])
 
     return (
-        <Box bg='tomato' w='100%' p={4} color='white'>
-            This is the Box
-        </Box>
+        <Container
+            bg='tomato'
+            w='75%' 
+            maxW='container.lg' 
+            p={8}
+            color='white'
+            centerContent 
+            mx='auto' 
+        >
+            <PreviewPost author='THE AUTHOR' title='VOICI LE TITRE' content='Voici le contenu de mon post.'/>
+        </Container>
     );
 }
 
