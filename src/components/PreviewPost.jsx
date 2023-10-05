@@ -2,6 +2,9 @@ import { Box } from '@chakra-ui/layout';
 import { Card, CardHeader, Heading, CardBody, Stack, StackDivider, Text, defineStyle, useColorModeValue } from '@chakra-ui/react';
 import { useNavigate } from 'react-router-dom';
 
+
+
+
 function PreviewPost({ id, author = "Unknown", title = "The title", content = "soiejfpaosefijpaoeifjapeofijapeofiajzpeofiazjpefoiazejfpoaziefjpaozeifjpazoeifj opefaijepfoaiezjfpo ijefzpao fiazjep ofiaj" }) {
     const navigate = useNavigate()
 

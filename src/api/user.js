@@ -1,12 +1,12 @@
 import apiUrl from "./config/apiConfg";
 
 
-export async function fetchPost(id) {
+export async function fetchUser(id) {
     id = parseInt(id)
     
     if (id) {
         try {
-            const response = await fetch(`${apiUrl}/posts/${id}`);
+            const response = await fetch(`${apiUrl}/users/${id}`);
             const data = await response.json();
             return data;
         } catch (error) {
