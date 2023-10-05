@@ -11,7 +11,6 @@ import { ChakraProvider } from "@chakra-ui/provider";
 import { extendTheme } from '@chakra-ui/react';
 
 
-
 const router = createBrowserRouter([
     {
         path: "/",
@@ -23,8 +22,6 @@ const router = createBrowserRouter([
     }
 ]);
 
-
-// 2. Add your color mode config
 const config = {
   initialColorMode: 'light',
   useSystemColorMode: false,
@@ -35,15 +32,14 @@ const colors = {
     secondary: '#D9CB84',  //Jaune clair
     tertiary1: '#593A27',  //Brun foncé
     tertiary2: '#A67D65',  //Brun clair
+    black: "#0D0D0D" //Noir
+
 }
 
-// 3. extend the theme
 const theme = extendTheme({ 
     config,
     colors
- })
-
-export default theme
+})
 
 ReactDOM.createRoot(document.getElementById("root")).render(
     <React.StrictMode>

@@ -1,16 +1,18 @@
 import { Box, Center, Container, Vstack } from '@chakra-ui/layout';
 import { useEffect, useState } from 'react';
 import { fetchPosts } from '../api/posts';
+import { fetchUsers } from '../api/users';
 import PreviewPost from '../components/PreviewPost';
 import { Spinner, Text } from '@chakra-ui/react';
 
 function Root() {
     const [posts, setPosts] = useState([])
+    const [users, setUsers] = useState([])
 
     useEffect(() => {
 
         if (posts.length === 0) {
-            async function fetchDataFromApi() {
+            async function fetchPostsDataFromApi() {
                 const results = await fetchPosts()
 
                 if (Array.isArray(results) && results.length != 0) {
@@ -19,28 +21,58 @@ function Root() {
                     console.error("Erreur lors de la récupération des données.")
                 }
             }
-            fetchDataFromApi()
+            fetchPostsDataFromApi()
 
         }
 
     }, [posts])
 
     useEffect(() => {
+
+        if (users.length === 0) {
+            async function fetchUsersDataFromApi() {
+                const results = await fetchUsers()
+
+                if (Array.isArray(results) && results.length != 0) {
+                    setUsers(results)
+                } else {
+                    console.error("Erreur lors de la récupération des données.")
+                }
+            }
+            fetchUsersDataFromApi()
+
+        }
+
+    }, [users])
+
+    useEffect(() => {
         console.log("posts", posts)
-    }, [posts])
+        console.log("users", users);
+        if (users) {
+            console.log(users[0])
+        }
+    }, [posts, users])
 
     return (
         <Container
-            bg="tertiary2"
-            w="75%"
+            bg="primary"
             maxW="container.lg"
             p={8}
             color="white"
             centerContent
             mx="auto"
         >
-            {posts.length !== 0 ? (
-                posts.map((post) => <PreviewPost key={post.id} author={post.userId} title={post.title} content={post.body} />)
+            {posts.length !== 0 && users.length !== 0 ? (
+                posts.map((post) => {
+
+                    const author = users.find(user => user.id === post.userId)
+
+                    return <PreviewPost
+                        key={post.id}
+                        author={author}
+                        title={post.title}
+                        content={post.body}
+                    />})
             ) : (
                 <Box
                     display="flex"

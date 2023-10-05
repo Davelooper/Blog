@@ -1,6 +1,6 @@
 import { Box, Center, Container, Vstack } from '@chakra-ui/layout';
 import { useEffect, useState } from 'react';
-import { fetchPosts } from '../api/posts';
+import { fetchPosts, fetchUsers } from '../api/posts';
 import { Card, CardHeader, Heading, CardBody, Stack, StackDivider, Text, defineStyle } from '@chakra-ui/react';
 
 
@@ -11,9 +11,13 @@ const test = defineStyle({
 
 function PreviewPost({ author = "Unknown", title = "The title", content = "soiejfpaosefijpaoeifjapeofijapeofiajzpeofiazjpefoiazejfpoaziefjpaozeifjpazoeifj opefaijepfoaiezjfpo ijefzpao fiazjep ofiaj" }) {
 
+    useEffect(() => {
+        console.log("author", author)
+    })
+
     return (
         
-        <Card bg="tertiary1">
+        <Card bg="tertiary2" mb={8} w={700}>
             <CardHeader>
                 <Heading size='md'>{title}</Heading>
             </CardHeader>
@@ -32,7 +36,7 @@ function PreviewPost({ author = "Unknown", title = "The title", content = "soiej
                             Auteur
                         </Heading>
                         <Text pt='2' fontSize='sm'>
-                            {author}
+                            {author.name}
                         </Text>
                     </Box>
                 </Stack>
