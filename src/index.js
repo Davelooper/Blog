@@ -30,8 +30,18 @@ const config = {
   useSystemColorMode: false,
 }
 
+const colors = {
+    primary: '#D9D9D9', //Gris clair
+    secondary: '#D9CB84',  //Jaune clair
+    tertiary1: '#593A27',  //Brun foncé
+    tertiary2: '#A67D65',  //Brun clair
+}
+
 // 3. extend the theme
-const theme = extendTheme({ config })
+const theme = extendTheme({ 
+    config,
+    colors
+ })
 
 export default theme
 

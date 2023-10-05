@@ -13,7 +13,7 @@ function PreviewPost({ author = "Unknown", title = "The title", content = "soiej
 
     return (
         
-        <Card bg="">
+        <Card bg="tertiary1">
             <CardHeader>
                 <Heading size='md'>{title}</Heading>
             </CardHeader>
