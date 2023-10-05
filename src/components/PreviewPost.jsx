@@ -1,23 +1,34 @@
 import { Box, Center, Container, Vstack } from '@chakra-ui/layout';
 import { useEffect, useState } from 'react';
 import { fetchPosts, fetchUsers } from '../api/posts';
-import { Card, CardHeader, Heading, CardBody, Stack, StackDivider, Text, defineStyle } from '@chakra-ui/react';
+import { Card, CardHeader, Heading, CardBody, Stack, StackDivider, Text, defineStyle, useColorModeValue } from '@chakra-ui/react';
 
-
-const test = defineStyle({
-    fontSize: 'lg',
-
-})
 
 function PreviewPost({ author = "Unknown", title = "The title", content = "soiejfpaosefijpaoeifjapeofijapeofiajzpeofiazjpefoiazejfpoaziefjpaozeifjpazoeifj opefaijepfoaiezjfpo ijefzpao fiazjep ofiaj" }) {
-
+   
     useEffect(() => {
         console.log("author", author)
     })
 
+    // const bgColor = useColorModeValue("tertiary1", "tertiary2");
+
+
     return (
         
-        <Card bg="tertiary2" mb={8} w={700}>
+        <Card 
+            bg="tertiary2" 
+            mb={8} 
+            w={700}
+            h={300}
+            _hover={{
+                cursor: 'pointer',
+                bg: 'tertiary1',
+                color: 'white',
+                width: "750px",
+                height: "350px",
+                transition: "background-color 0.3s ease-in-out, color 0.3s ease-in-out, width 0.2s ease-in-out, height 0.2s ease-in-out"
+            }}
+            >
             <CardHeader>
                 <Heading size='md'>{title}</Heading>
             </CardHeader>
