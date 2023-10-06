@@ -1,10 +1,33 @@
+import { Image, Box, Heading, Text, Container } from "@chakra-ui/react";
+
 function ViewPost({ id, author = "Unknown", title = "The title", content = "soiejfpaosefijpaoeifjapeofijapeofiajzpeofiazjpefoiazejfpoaziefjpaozeifjpazoeifj opefaijepfoaiezjfpo ijefzpao fiazjep ofiaj" }) {
 
-   
+
 
     return (
+        <Box
+            // bg="blackAlpha.200"
+            maxW="Box.lg"
+            p={8}
+            color="white"
+            centerContent
+            mx="auto"
+        >
+            <Box>
+                <Box display="flex" alignItems="center" fontSize="xl" mb={8}>
+                    <Image
+                        src="/images/profile1r.jpg"
+                        borderRadius="full"
+                        boxSize="100px"
 
-        <div>Plop</div>
+                    />
+                    <Text ml="10px" >By {author}</Text>
+                </Box>
+                <Heading textAlign="center" mb={8}>{title}</Heading>
+                <Image src="/images/article1r.jpg" mb={8} />
+                <Text textAlign="justify" fontSize="3xl">{content}</Text>
+            </Box>
+        </Box>
     )
 }
 
