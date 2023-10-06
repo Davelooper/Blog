@@ -26,7 +26,7 @@ function ViewPost({ id, author = "Unknown", title = "The title", content = "soie
                 </Box>
                 <Box>
                     <Image src="/images/article1r.jpg" />
-                    <Text textAlign="center" fontSize="3xl">{content}</Text>
+                    <Text textAlign="justify" fontSize="3xl">{content}</Text>
                 </Box>
             </Box>
         </Container>
