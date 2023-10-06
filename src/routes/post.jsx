@@ -4,13 +4,19 @@ import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { fetchUser } from '../api/user';
 import { fetchPostComments } from '../api/postComments';
+import { Container, HStack, Text, Divider, IconButton } from '@chakra-ui/react';
+import ViewComment from '../components/ViewComment';
+import { ArrowBackIcon } from "@chakra-ui/icons";
+import { useNavigate } from 'react-router-dom';
+
 
 
 function Post() {
     const [post, setPost] = useState({})
     const [user, setUser] = useState({})
     const [comments, setComments] = useState([])
-    const id = useParams().id;
+    const id = useParams().id
+    const navigate = useNavigate()
 
     //Récupération du post
     useEffect(() => {
@@ -46,7 +52,7 @@ function Post() {
             fetchUserDataFromApi()
         }
     }, [post, user])
-    
+
 
     //Récupération des commentaires du post
     useEffect(() => {
@@ -71,7 +77,41 @@ function Post() {
     })
 
     return (
-        <ViewPost />
+        <Container
+            bg="blackAlpha.200"
+            maxW="container.lg"
+            p={8}
+            color="white"
+            mx="auto"
+            minH="100vh"
+        >
+            <HStack spacing={2} align="center">
+      <IconButton
+        aria-label="Revenir en arrière"
+        icon={<ArrowBackIcon />}
+        onClick={() => navigate(`/`)}
+        size="lg"
+        colorScheme="teal"
+        _hover={{
+            backgroundColor: "gray.500", // Changer la couleur de fond au survol
+          }}
+      />
+      <Text>Retour aux articles</Text>
+    </HStack>
+
+            <ViewPost />
+            <Divider borderWidth="1px" mb="30px" />
+            {comments.length !== 0 && (
+                comments.map((comment) => (
+                    <ViewComment
+                        key={comment.id}
+                        content={comment.body}
+                        email={comment.email}
+                        title={comment.name}
+                    />
+                ))
+            )}
+        </Container>
     );
 }
 
