@@ -67,7 +67,9 @@ function Root() {
                 posts
                     .filter((post) => {
                         if (searchText === "") {
+
                             return true
+
                         } else {
                             if (searchCategory === "title") {
 
@@ -84,12 +86,15 @@ function Root() {
                                 return post.userId === author.id
 
                             } else {
+
                                 return true
+
                             }
                         }
 
                     })
                     .map((post) => {
+                        
                         const author = users.find((user) => user.id === post.userId)
              
                         return (
