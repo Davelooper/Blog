@@ -81,7 +81,7 @@ function Post() {
     return (
         <Container
             bg="blackAlpha.200"
-            maxW="container.lg"
+            // maxW="container.lg"
             p={8}
             color="white"
             mx="auto"

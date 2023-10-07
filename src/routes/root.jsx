@@ -52,7 +52,7 @@ function Root() {
     return (
         <Container
             bg="primary"
-            maxW="container.lg"
+            // maxW="container.xl"
             p={8}
             color="white"
             centerContent

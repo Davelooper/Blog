@@ -36,9 +36,18 @@ const colors = {
 
 }
 
+const components = {
+    Container: {
+        baseStyle: {
+            maxWidth: "container.xl"
+        }
+    }
+}
+
 const theme = extendTheme({ 
     config,
-    colors
+    colors,
+    components
 })
 
 ReactDOM.createRoot(document.getElementById("root")).render(
