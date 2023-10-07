@@ -1,6 +1,6 @@
-import { Image, Box, Heading, Text, Container } from "@chakra-ui/react";
+import { Image, Box, Heading, Text } from "@chakra-ui/react";
 
-function ViewPost({ id, author = "Unknown", title = "The title", content = "soiejfpaosefijpaoeifjapeofijapeofiajzpeofiazjpefoiazejfpoaziefjpaozeifjpazoeifj opefaijepfoaiezjfpo ijefzpao fiazjep ofiaj" }) {
+function ViewPost({ id, author = "Unknown", title = "The title", content = "soiejfpaosefijpaoeifjapeofijapeofiajzpeofiazjpefoiazejfpoaziefjpaozeifjpazoeifj opefaijepfoaiezjfpo ijefzpao fiazjep ofiaj", imageSrc = "/images/profile1r.jpg" }) {
 
 
 
@@ -24,7 +24,7 @@ function ViewPost({ id, author = "Unknown", title = "The title", content = "soie
                     <Text ml="10px" >By {author}</Text>
                 </Box>
                 <Heading textAlign="center" mb={8}>{title}</Heading>
-                <Image src="/images/article1r.jpg" mb={8} />
+                <Image src={imageSrc} mb={8} />
                 <Text textAlign="justify" fontSize="3xl">{content}</Text>
             </Box>
         </Box>

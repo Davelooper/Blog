@@ -5,6 +5,7 @@ import { fetchUsers } from '../api/users';
 import PreviewPost from '../components/PreviewPost';
 import { Spinner, Text } from '@chakra-ui/react';
 import Search from '../components/Search';
+import { generateArticleRandomImageURL } from '../utils/imagesUtils';
 
 function Root() {
     const [posts, setPosts] = useState([])
@@ -96,7 +97,8 @@ function Root() {
                     .map((post) => {
                         
                         const author = users.find((user) => user.id === post.userId)
-             
+                        const imageSrc = generateArticleRandomImageURL()
+
                         return (
                             <PreviewPost
                                 key={`post-${post.id}`}
@@ -104,6 +106,7 @@ function Root() {
                                 title={post.title}
                                 content={post.body}
                                 id={post.id}
+                                imageSrc={imageSrc}
                             />
                         )
                     })
