@@ -6,6 +6,7 @@ import PreviewPost from '../components/PreviewPost';
 import { Spinner, Text, VStack } from '@chakra-ui/react';
 import Search from '../components/Search';
 import { generateArticleRandomImageURL } from '../utils/imagesUtils';
+import { AnimatePresence } from 'framer-motion';
 
 function Root() {
     const [posts, setPosts] = useState([])
@@ -50,7 +51,7 @@ function Root() {
     }, [users])
 
     return (
-        <Container>
+        <Container centerContent>
 
             <Search
                 searchText={searchText}
@@ -60,9 +61,7 @@ function Root() {
             />
 
             {posts.length !== 0 && users.length !== 0 ? (
-                <VStack>
-                    {posts
-                        .filter((post) => {
+                posts.filter((post) => {
                             if (searchText === "") {
                                 return true;
                             } else {
@@ -85,17 +84,18 @@ function Root() {
                             const imageSrc = generateArticleRandomImageURL();
 
                             return (
-                                <PreviewPost
-                                    key={`post-${post.id}`}
-                                    author={author}
-                                    title={post.title}
-                                    content={post.body}
-                                    id={post.id}
-                                    imageSrc={imageSrc}
+                                    <PreviewPost
+                                        key={`post-${post.id}`}
+                                        author={author}
+                                        title={post.title}
+                                        content={post.body}
+                                        id={post.id}
+                                        imageSrc={imageSrc}
                                 />
+                                
                             );
-                        })}
-                </VStack>
+                        })
+         
             ) : (
                 <Box
                     display="flex"

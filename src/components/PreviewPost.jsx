@@ -1,5 +1,6 @@
 import { Box } from '@chakra-ui/layout';
 import { Card, CardHeader, Heading, CardBody, Stack, StackDivider, Text, Image } from '@chakra-ui/react';
+import { motion } from 'framer-motion';
 import { useNavigate } from 'react-router-dom';
 
 
@@ -20,18 +21,13 @@ function PreviewPost({ id, imageSrc = "/images/article1r.jpg", author = "Unknown
     return (
 
         <Card
+            as={motion.div}
             bg="tertiary2"
             mb={8}
             w={700}
             h={400}
-            _hover={{
-                cursor: 'pointer',
-                bg: 'tertiary1',
-                color: 'white',
-                width: "750px",
-                height: "450px",
-                transition: "background-color 0.3s ease-in-out, color 0.3s ease-in-out, width 0.2s ease-in-out, height 0.2s ease-in-out"
-            }}
+            whileHover={{ scale: 1.1 }}
+            cursor="pointer"
             onClick={handleClick}
         >
             <CardHeader>
