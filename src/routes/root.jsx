@@ -4,10 +4,13 @@ import { fetchPosts } from '../api/posts';
 import { fetchUsers } from '../api/users';
 import PreviewPost from '../components/PreviewPost';
 import { Spinner, Text } from '@chakra-ui/react';
+import Search from '../components/Search';
 
 function Root() {
     const [posts, setPosts] = useState([])
     const [users, setUsers] = useState([])
+    const [searchText, setSearchText] = useState("")
+    const [searchCategory, setSearchCategory] = useState("content")
 
     useEffect(() => {
 
@@ -54,17 +57,51 @@ function Root() {
             centerContent
             mx="auto"
         >
+            <Search
+                searchText={searchText}
+                searchCategory={searchCategory}
+                setSearchCategory={setSearchCategory}
+                setSearchText={setSearchText}
+            />
             {posts.length !== 0 && users.length !== 0 ? (
-                posts.map((post) => {
-                    const author = users.find(user => user.id === post.userId)
+                posts
+                    .filter((post) => {
+                        if (searchText === "") {
+                            return true
+                        } else {
+                            if (searchCategory === "title") {
 
-                    return <PreviewPost
-                        key={`post-${post.id}`}
-                        author={author}
-                        title={post.title}
-                        content={post.body}
-                        id={post.id}
-                    />})
+                                return post.title.toLowerCase().includes(searchText.toLowerCase())
+
+                            } else if (searchCategory === "content") {
+
+                                return post.body.toLowerCase().includes(searchText.toLowerCase())
+
+                            } else if (searchCategory === "author") {
+
+                                const author = users.find((user) => user.name.toLowerCase().includes(searchText.toLowerCase()))
+                        
+                                return post.userId === author.id
+
+                            } else {
+                                return true
+                            }
+                        }
+
+                    })
+                    .map((post) => {
+                        const author = users.find((user) => user.id === post.userId)
+             
+                        return (
+                            <PreviewPost
+                                key={`post-${post.id}`}
+                                author={author}
+                                title={post.title}
+                                content={post.body}
+                                id={post.id}
+                            />
+                        )
+                    })
             ) : (
                 <Box
                     display="flex"
@@ -77,8 +114,8 @@ function Root() {
                 </Box>
             )}
         </Container>
-    );
+    )
 
 }
 
-export default Root;
+export default Root
