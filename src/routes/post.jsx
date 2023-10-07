@@ -79,14 +79,7 @@ function Post() {
     })
 
     return (
-        <Container
-            bg="blackAlpha.200"
-            // maxW="container.lg"
-            p={8}
-            color="white"
-            mx="auto"
-            minH="100vh"
-        >
+        <Container>
             <HStack spacing={2} align="center">
                 <IconButton
                     aria-label="Revenir en arrière"
