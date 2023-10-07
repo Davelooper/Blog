@@ -4,6 +4,10 @@ import { motion } from 'framer-motion';
 import { useNavigate } from 'react-router-dom';
 
 
+const boxVariants = {
+    visible: { x: 0, opacity: 1 },
+    hidden: { x: 300, opacity: 0 }
+}
 
 
 function PreviewPost({ id, imageSrc = "/images/article1r.jpg", author = "Unknown", title = "The title", content = "soiejfpaosefijpaoeifjapeofijapeofiajzpeofiazjpefoiazejfpoaziefjpaozeifjpazoeifj opefaijepfoaiezjfpo ijefzpao fiazjep ofiaj" }) {
@@ -22,6 +26,10 @@ function PreviewPost({ id, imageSrc = "/images/article1r.jpg", author = "Unknown
 
         <Card
             as={motion.div}
+            variants={boxVariants}
+            initial="hidden"
+            animate="visible"
+            exit="hidden"
             bg="tertiary2"
             mb={8}
             w={700}

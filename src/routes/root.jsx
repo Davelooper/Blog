@@ -1,4 +1,4 @@
-import { Box, Container} from '@chakra-ui/layout';
+import { Box, Container } from '@chakra-ui/layout';
 import { useEffect, useState } from 'react';
 import { fetchPosts } from '../api/posts';
 import { fetchUsers } from '../api/users';
@@ -7,6 +7,8 @@ import { Spinner, Text, VStack } from '@chakra-ui/react';
 import Search from '../components/Search';
 import { generateArticleRandomImageURL } from '../utils/imagesUtils';
 import { AnimatePresence } from 'framer-motion';
+
+
 
 function Root() {
     const [posts, setPosts] = useState([])
@@ -61,7 +63,8 @@ function Root() {
             />
 
             {posts.length !== 0 && users.length !== 0 ? (
-                posts.filter((post) => {
+                    posts
+                        .filter((post) => {
                             if (searchText === "") {
                                 return true;
                             } else {
@@ -73,7 +76,7 @@ function Root() {
                                     const author = users.find((user) =>
                                         user.name.toLowerCase().includes(searchText.toLowerCase())
                                     );
-                                    return post.userId === author.id;
+                                    return post.userId === author?.id; // Utilisation de l'opérateur ?. pour éviter une erreur si author est undefined
                                 } else {
                                     return true;
                                 }
@@ -84,28 +87,28 @@ function Root() {
                             const imageSrc = generateArticleRandomImageURL();
 
                             return (
-                                    <PreviewPost
-                                        key={`post-${post.id}`}
-                                        author={author}
-                                        title={post.title}
-                                        content={post.body}
-                                        id={post.id}
-                                        imageSrc={imageSrc}
+                                <PreviewPost
+                                    key={`post-${post.id}`}
+                                    author={author}
+                                    title={post.title}
+                                    content={post.body}
+                                    id={post.id}
+                                    imageSrc={imageSrc}
                                 />
-                                
                             );
                         })
-         
-            ) : (
-                <Box
-                    display="flex"
-                    alignItems="center"
-                    justifyContent="center"
-                    flexDirection="column"
-                >
-                    <Text mb={4} color={"text.100"} fontWeight="bold">Chargement des posts...</Text>
-                    <Spinner size='xl' color='text.100' mx="auto" />
-                </Box>
+            ) 
+            : 
+            (
+            <Box
+                display="flex"
+                alignItems="center"
+                justifyContent="center"
+                flexDirection="column"
+            >
+                <Text mb={4} color={"text.100"} fontWeight="bold">Chargement des posts...</Text>
+                <Spinner size='xl' color='text.100' mx="auto" />
+            </Box>
             )}
         </Container>
     )
