@@ -7,7 +7,7 @@ import { fetchPostComments } from '../api/postComments';
 import { Container, HStack, Text, Divider, IconButton } from '@chakra-ui/react';
 import ViewComment from '../components/ViewComment';
 import { ArrowBackIcon } from "@chakra-ui/icons";
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 
 
 
@@ -17,6 +17,8 @@ function Post() {
     const [comments, setComments] = useState([])
     const id = useParams().id
     const navigate = useNavigate()
+    const location = useLocation()
+    const imageSrc = location.state && location.state.imageSrc ? location.state.imageSrc : ""
 
     //Récupération du post
     useEffect(() => {
@@ -86,20 +88,20 @@ function Post() {
             minH="100vh"
         >
             <HStack spacing={2} align="center">
-      <IconButton
-        aria-label="Revenir en arrière"
-        icon={<ArrowBackIcon />}
-        onClick={() => navigate(`/`)}
-        size="lg"
-        colorScheme="teal"
-        _hover={{
-            backgroundColor: "gray.500", // Changer la couleur de fond au survol
-          }}
-      />
-      <Text>Retour aux articles</Text>
-    </HStack>
+                <IconButton
+                    aria-label="Revenir en arrière"
+                    icon={<ArrowBackIcon />}
+                    onClick={() => navigate(`/`)}
+                    size="lg"
+                    colorScheme="teal"
+                    _hover={{
+                        backgroundColor: "gray.500", // Changer la couleur de fond au survol
+                    }}
+                />
+                <Text>Retour aux articles</Text>
+            </HStack>
 
-            <ViewPost />
+            <ViewPost imageSrc={imageSrc} />
             <Divider borderWidth="1px" mb="30px" />
             {comments.length !== 0 && (
                 comments.map((comment) => (
