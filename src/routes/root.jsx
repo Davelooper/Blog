@@ -1,9 +1,9 @@
-import { Box, Center, Container, Vstack } from '@chakra-ui/layout';
+import { Box, Container} from '@chakra-ui/layout';
 import { useEffect, useState } from 'react';
 import { fetchPosts } from '../api/posts';
 import { fetchUsers } from '../api/users';
 import PreviewPost from '../components/PreviewPost';
-import { Spinner, Text } from '@chakra-ui/react';
+import { Spinner, Text, VStack } from '@chakra-ui/react';
 import Search from '../components/Search';
 import { generateArticleRandomImageURL } from '../utils/imagesUtils';
 
@@ -50,66 +50,52 @@ function Root() {
     }, [users])
 
     return (
-        <Container
-            bg="primary"
-            maxW="container.lg"
-            p={8}
-            color="white"
-            centerContent
-            mx="auto"
-        >
+        <Container>
+
             <Search
                 searchText={searchText}
                 searchCategory={searchCategory}
                 setSearchCategory={setSearchCategory}
                 setSearchText={setSearchText}
             />
+
             {posts.length !== 0 && users.length !== 0 ? (
-                posts
-                    .filter((post) => {
-                        if (searchText === "") {
-
-                            return true
-
-                        } else {
-                            if (searchCategory === "title") {
-
-                                return post.title.toLowerCase().includes(searchText.toLowerCase())
-
-                            } else if (searchCategory === "content") {
-
-                                return post.body.toLowerCase().includes(searchText.toLowerCase())
-
-                            } else if (searchCategory === "author") {
-
-                                const author = users.find((user) => user.name.toLowerCase().includes(searchText.toLowerCase()))
-                        
-                                return post.userId === author.id
-
+                <VStack>
+                    {posts
+                        .filter((post) => {
+                            if (searchText === "") {
+                                return true;
                             } else {
-
-                                return true
-
+                                if (searchCategory === "title") {
+                                    return post.title.toLowerCase().includes(searchText.toLowerCase());
+                                } else if (searchCategory === "content") {
+                                    return post.body.toLowerCase().includes(searchText.toLowerCase());
+                                } else if (searchCategory === "author") {
+                                    const author = users.find((user) =>
+                                        user.name.toLowerCase().includes(searchText.toLowerCase())
+                                    );
+                                    return post.userId === author.id;
+                                } else {
+                                    return true;
+                                }
                             }
-                        }
+                        })
+                        .map((post) => {
+                            const author = users.find((user) => user.id === post.userId);
+                            const imageSrc = generateArticleRandomImageURL();
 
-                    })
-                    .map((post) => {
-                        
-                        const author = users.find((user) => user.id === post.userId)
-                        const imageSrc = generateArticleRandomImageURL()
-
-                        return (
-                            <PreviewPost
-                                key={`post-${post.id}`}
-                                author={author}
-                                title={post.title}
-                                content={post.body}
-                                id={post.id}
-                                imageSrc={imageSrc}
-                            />
-                        )
-                    })
+                            return (
+                                <PreviewPost
+                                    key={`post-${post.id}`}
+                                    author={author}
+                                    title={post.title}
+                                    content={post.body}
+                                    id={post.id}
+                                    imageSrc={imageSrc}
+                                />
+                            );
+                        })}
+                </VStack>
             ) : (
                 <Box
                     display="flex"

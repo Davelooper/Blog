@@ -32,13 +32,27 @@ const colors = {
     secondary: '#D9CB84',  //Jaune clair
     tertiary1: '#593A27',  //Brun foncé
     tertiary2: '#A67D65',  //Brun clair
-    black: "#0D0D0D" //Noir
+    black: "#0D0D0D", //Noir
 
+}
+
+const components = {
+    Container: {
+        baseStyle: {
+            maxWidth: "container.xl",
+            p: "10px",
+            color: "white",
+            mx: "auto",
+            minH: "100vh",
+            bg: "blackAlpha.200"
+        }
+    }
 }
 
 const theme = extendTheme({ 
     config,
-    colors
+    colors,
+    components
 })
 
 ReactDOM.createRoot(document.getElementById("root")).render(
