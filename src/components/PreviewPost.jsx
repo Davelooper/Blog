@@ -2,6 +2,7 @@ import { Box } from '@chakra-ui/layout';
 import { Card, CardHeader, Heading, CardBody, Stack, StackDivider, Text, Image } from '@chakra-ui/react';
 import { motion } from 'framer-motion';
 import { useNavigate } from 'react-router-dom';
+import { useInView } from 'react-intersection-observer';
 
 
 const boxVariants = {
@@ -12,6 +13,7 @@ const boxVariants = {
 
 function PreviewPost({ id, imageSrc = "/images/article1r.jpg", author = "Unknown", title = "The title", content = "soiejfpaosefijpaoeifjapeofijapeofiajzpeofiazjpefoiazejfpoaziefjpaozeifjpazoeifj opefaijepfoaiezjfpo ijefzpao fiazjep ofiaj" }) {
     const navigate = useNavigate()
+    const [ref, inView] = useInView({threshold: 0.6, triggerOnce: true})
 
     function handleClick() {
 
@@ -25,10 +27,11 @@ function PreviewPost({ id, imageSrc = "/images/article1r.jpg", author = "Unknown
     return (
 
         <Card
+            ref={ref}
             as={motion.div}
             variants={boxVariants}
             initial="hidden"
-            animate="visible"
+            animate={inView ? "visible" : "hidden"}
             exit="hidden"
             bg="tertiary2"
             mb={8}

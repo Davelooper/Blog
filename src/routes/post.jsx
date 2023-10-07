@@ -72,12 +72,6 @@ function Post() {
         }
     })
 
-    useEffect(() => {
-        if (comments.length !== 0) {
-            console.log("comments", comments);
-        }
-    })
-
     return (
         <Container>
             <HStack spacing={2} align="center">
