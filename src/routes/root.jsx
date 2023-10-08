@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react';
 import { fetchPosts } from '../api/posts';
 import { fetchUsers } from '../api/users';
 import PreviewPost from '../components/PreviewPost';
-import { Image, Spinner, Text } from '@chakra-ui/react';
+import { Image, Spinner, Text, Divider, AbsoluteCenter } from '@chakra-ui/react';
 import Search from '../components/Search';
 import { generateArticleRandomImageURL } from '../utils/imagesUtils';
 import NavBar from '../components/NavBar';
@@ -53,18 +53,18 @@ function Root() {
 
     return (
         <>
-        <NavBar />
-        <Image src='/images/banner.avif' htmlWidth="100%" style={{ maxHeight: '40vh' }}/>
-        <Container centerContent>
+            <NavBar />
+            <Image src='/images/banner.avif' htmlWidth="100%" style={{ maxHeight: '60vh' }} />
+            <Container centerContent>
 
-            <Search
-                searchText={searchText}
-                searchCategory={searchCategory}
-                setSearchCategory={setSearchCategory}
-                setSearchText={setSearchText}
-            />
-
-            {posts.length !== 0 && users.length !== 0 ? (
+                <Search
+                    searchText={searchText}
+                    searchCategory={searchCategory}
+                    setSearchCategory={setSearchCategory}
+                    setSearchText={setSearchText}
+                />
+            
+                {posts.length !== 0 && users.length !== 0 ? (
                     posts
                         .filter((post) => {
                             if (searchText === "") {
@@ -99,20 +99,20 @@ function Root() {
                                 />
                             );
                         })
-            ) 
-            : 
-            (
-            <Box
-                display="flex"
-                alignItems="center"
-                justifyContent="center"
-                flexDirection="column"
-            >
-                <Text mb={4} color={"text.100"} fontWeight="bold">Chargement des posts...</Text>
-                <Spinner size='xl' color='text.100' mx="auto" />
-            </Box>
-            )}
-        </Container>
+                )
+                    :
+                    (
+                        <Box
+                            display="flex"
+                            alignItems="center"
+                            justifyContent="center"
+                            flexDirection="column"
+                        >
+                            <Text mb={4} color={"text.100"} fontWeight="bold">Chargement des posts...</Text>
+                            <Spinner size='xl' color='text.100' mx="auto" />
+                        </Box>
+                    )}
+            </Container>
         </>
     )
 

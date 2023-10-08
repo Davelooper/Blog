@@ -28,11 +28,10 @@ const config = {
 }
 
 const colors = {
-    primary: 'white', //Gris clair
-    secondary: 'blackAlpha.200',  //Jaune clair
-    tertiary: "gray.500", //Noir
-
-
+    primary: 'white',
+    secondary: 'rgba(0, 0, 0, 0.08)', //BlackAlpha.200
+    tertiary: "#718096", //Gray.500
+    quaternary: "rgba(0, 0, 0, 0.64)", //BlackAlpha.700
 }
 
 const components = {
@@ -48,7 +47,8 @@ const components = {
     },
     Text: {
         baseStyle: {
-            fontFamily: 'Source Sans Pro, sans-serif'
+            fontFamily: 'Source Sans Pro, sans-serif',
+            color: "blackAlpha.700"
         }
     },
     Link: {
@@ -83,7 +83,7 @@ const styles = {
     global: {
         body: {
             bg: "blackAlpha.200"
-        }
+        },
     }
 }
 
