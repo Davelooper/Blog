@@ -6,10 +6,9 @@ import { useInView } from 'react-intersection-observer';
 
 
 const boxVariants = {
-    visible: { x: 0, opacity: 1 },
-    hidden: { x: 300, opacity: 0 }
+    visible: { y: 0,  opacity: 1 },
+    hidden: { y: -50,  opacity: 0 }
 }
-
 
 function PreviewPost({ id, imageSrc = "/images/article1r.jpg", author = "Unknown", title = "The title", content = "soiejfpaosefijpaoeifjapeofijapeofiajzpeofiazjpefoiazejfpoaziefjpaozeifjpazoeifj opefaijepfoaiezjfpo ijefzpao fiazjep ofiaj" }) {
     const navigate = useNavigate()
