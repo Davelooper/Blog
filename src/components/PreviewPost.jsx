@@ -36,6 +36,7 @@ function PreviewPost({ id, imageSrc = "/images/article1r.jpg", author = "Unknown
             bg="blackAlpha.200"
             mb={8}
             maxW={700}
+            minH={450}
             whileHover={{ scale: 1.1 }}
             cursor="pointer"
             onClick={handleClick}
