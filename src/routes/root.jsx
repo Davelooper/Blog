@@ -3,10 +3,9 @@ import { useEffect, useState } from 'react';
 import { fetchPosts } from '../api/posts';
 import { fetchUsers } from '../api/users';
 import PreviewPost from '../components/PreviewPost';
-import { Spinner, Text, VStack } from '@chakra-ui/react';
+import { Spinner, Text } from '@chakra-ui/react';
 import Search from '../components/Search';
 import { generateArticleRandomImageURL } from '../utils/imagesUtils';
-import { AnimatePresence } from 'framer-motion';
 
 
 
@@ -22,7 +21,7 @@ function Root() {
             async function fetchPostsDataFromApi() {
                 const results = await fetchPosts()
 
-                if (Array.isArray(results) && results.length != 0) {
+                if (Array.isArray(results) && results.length !== 0) {
                     setPosts(results)
                 } else {
                     console.error("Erreur lors de la récupération des données.")
@@ -40,7 +39,7 @@ function Root() {
             async function fetchUsersDataFromApi() {
                 const results = await fetchUsers()
 
-                if (Array.isArray(results) && results.length != 0) {
+                if (Array.isArray(results) && results.length !== 0) {
                     setUsers(results)
                 } else {
                     console.error("Erreur lors de la récupération des données.")
