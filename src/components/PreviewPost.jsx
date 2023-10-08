@@ -1,12 +1,19 @@
 import { Box } from '@chakra-ui/layout';
 import { Card, CardHeader, Heading, CardBody, Stack, StackDivider, Text, Image } from '@chakra-ui/react';
+import { motion } from 'framer-motion';
 import { useNavigate } from 'react-router-dom';
+import { useInView } from 'react-intersection-observer';
 
 
+const boxVariants = {
+    visible: { x: 0, opacity: 1 },
+    hidden: { x: 300, opacity: 0 }
+}
 
 
 function PreviewPost({ id, imageSrc = "/images/article1r.jpg", author = "Unknown", title = "The title", content = "soiejfpaosefijpaoeifjapeofijapeofiajzpeofiazjpefoiazejfpoaziefjpaozeifjpazoeifj opefaijepfoaiezjfpo ijefzpao fiazjep ofiaj" }) {
     const navigate = useNavigate()
+    const [ref, inView] = useInView({threshold: 0.6, triggerOnce: true})
 
     function handleClick() {
 
@@ -20,18 +27,18 @@ function PreviewPost({ id, imageSrc = "/images/article1r.jpg", author = "Unknown
     return (
 
         <Card
+            ref={ref}
+            as={motion.div}
+            variants={boxVariants}
+            initial="hidden"
+            animate={inView ? "visible" : "hidden"}
+            exit="hidden"
             bg="tertiary2"
             mb={8}
             w={700}
             h={400}
-            _hover={{
-                cursor: 'pointer',
-                bg: 'tertiary1',
-                color: 'white',
-                width: "750px",
-                height: "450px",
-                transition: "background-color 0.3s ease-in-out, color 0.3s ease-in-out, width 0.2s ease-in-out, height 0.2s ease-in-out"
-            }}
+            whileHover={{ scale: 1.1 }}
+            cursor="pointer"
             onClick={handleClick}
         >
             <CardHeader>

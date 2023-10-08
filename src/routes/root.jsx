@@ -1,11 +1,13 @@
-import { Box, Container} from '@chakra-ui/layout';
+import { Box, Container } from '@chakra-ui/layout';
 import { useEffect, useState } from 'react';
 import { fetchPosts } from '../api/posts';
 import { fetchUsers } from '../api/users';
 import PreviewPost from '../components/PreviewPost';
-import { Spinner, Text, VStack } from '@chakra-ui/react';
+import { Spinner, Text } from '@chakra-ui/react';
 import Search from '../components/Search';
 import { generateArticleRandomImageURL } from '../utils/imagesUtils';
+
+
 
 function Root() {
     const [posts, setPosts] = useState([])
@@ -19,7 +21,7 @@ function Root() {
             async function fetchPostsDataFromApi() {
                 const results = await fetchPosts()
 
-                if (Array.isArray(results) && results.length != 0) {
+                if (Array.isArray(results) && results.length !== 0) {
                     setPosts(results)
                 } else {
                     console.error("Erreur lors de la récupération des données.")
@@ -37,7 +39,7 @@ function Root() {
             async function fetchUsersDataFromApi() {
                 const results = await fetchUsers()
 
-                if (Array.isArray(results) && results.length != 0) {
+                if (Array.isArray(results) && results.length !== 0) {
                     setUsers(results)
                 } else {
                     console.error("Erreur lors de la récupération des données.")
@@ -50,7 +52,7 @@ function Root() {
     }, [users])
 
     return (
-        <Container>
+        <Container centerContent>
 
             <Search
                 searchText={searchText}
@@ -60,8 +62,7 @@ function Root() {
             />
 
             {posts.length !== 0 && users.length !== 0 ? (
-                <VStack>
-                    {posts
+                    posts
                         .filter((post) => {
                             if (searchText === "") {
                                 return true;
@@ -74,7 +75,7 @@ function Root() {
                                     const author = users.find((user) =>
                                         user.name.toLowerCase().includes(searchText.toLowerCase())
                                     );
-                                    return post.userId === author.id;
+                                    return post.userId === author?.id; // Utilisation de l'opérateur ?. pour éviter une erreur si author est undefined
                                 } else {
                                     return true;
                                 }
@@ -94,18 +95,19 @@ function Root() {
                                     imageSrc={imageSrc}
                                 />
                             );
-                        })}
-                </VStack>
-            ) : (
-                <Box
-                    display="flex"
-                    alignItems="center"
-                    justifyContent="center"
-                    flexDirection="column"
-                >
-                    <Text mb={4} color={"text.100"} fontWeight="bold">Chargement des posts...</Text>
-                    <Spinner size='xl' color='text.100' mx="auto" />
-                </Box>
+                        })
+            ) 
+            : 
+            (
+            <Box
+                display="flex"
+                alignItems="center"
+                justifyContent="center"
+                flexDirection="column"
+            >
+                <Text mb={4} color={"text.100"} fontWeight="bold">Chargement des posts...</Text>
+                <Spinner size='xl' color='text.100' mx="auto" />
+            </Box>
             )}
         </Container>
     )
