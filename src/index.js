@@ -23,36 +23,82 @@ const router = createBrowserRouter([
 ]);
 
 const config = {
-  initialColorMode: 'light',
-  useSystemColorMode: false,
+    initialColorMode: 'light',
+    useSystemColorMode: false,
 }
 
 const colors = {
-    primary: '#D9D9D9', //Gris clair
-    secondary: '#D9CB84',  //Jaune clair
-    tertiary1: '#593A27',  //Brun foncé
-    tertiary2: '#A67D65',  //Brun clair
-    black: "#0D0D0D", //Noir
+    primary: 'white', //Gris clair
+    secondary: 'blackAlpha.200',  //Jaune clair
+    tertiary: "gray.500", //Noir
+
 
 }
 
 const components = {
     Container: {
         baseStyle: {
-            maxWidth: "container.xl",
+            maxWidth: "80%",
             p: "10px",
             color: "white",
             mx: "auto",
             minH: "100vh",
+            bg: "white"
+        }
+    },
+    Text: {
+        baseStyle: {
+            fontFamily: 'Source Sans Pro, sans-serif'
+        }
+    },
+    Link: {
+        baseStyle: {
+            _hover: {
+                textDecoration: 'none'
+            },
+            fontFamily: 'Source Sans Pro, sans-serif',
+            color: "gray.500"
+        }
+    },
+    Nav: {
+        baseStyle: {
+            bg: 'blackAlpha.200'
+        }
+    },
+    Heading: {
+        baseStyle: {
+            color: "gray.500",
+            fontWeight: "900"
+        }
+    },
+    Card: {
+        baseStyle: {
+            borderRadius: '0',
+            boxShadow: '0px 2px 4px rgba(0, 0, 0, 0.1)', 
+        },
+    },
+}
+
+const styles = {
+    global: {
+        body: {
             bg: "blackAlpha.200"
         }
     }
 }
 
-const theme = extendTheme({ 
+const fonts = {
+    heading: 'Cormorant Garamond, serif',
+    // body: 'Roboto, sans-serif'
+    body: 'Source Sans Pro, sans-serif',
+}
+
+const theme = extendTheme({
     config,
     colors,
-    components
+    components,
+    fonts,
+    styles
 })
 
 ReactDOM.createRoot(document.getElementById("root")).render(

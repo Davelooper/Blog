@@ -3,10 +3,10 @@ import { useEffect, useState } from 'react';
 import { fetchPosts } from '../api/posts';
 import { fetchUsers } from '../api/users';
 import PreviewPost from '../components/PreviewPost';
-import { Spinner, Text } from '@chakra-ui/react';
+import { Image, Spinner, Text } from '@chakra-ui/react';
 import Search from '../components/Search';
 import { generateArticleRandomImageURL } from '../utils/imagesUtils';
-
+import NavBar from '../components/NavBar';
 
 
 function Root() {
@@ -52,6 +52,9 @@ function Root() {
     }, [users])
 
     return (
+        <>
+        <NavBar />
+        <Image src='/images/banner.avif' htmlWidth="100%" style={{ maxHeight: '40vh' }}/>
         <Container centerContent>
 
             <Search
@@ -110,6 +113,7 @@ function Root() {
             </Box>
             )}
         </Container>
+        </>
     )
 
 }
