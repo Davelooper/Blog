@@ -6,10 +6,9 @@ import { useInView } from 'react-intersection-observer';
 
 
 const boxVariants = {
-    visible: { x: 0, opacity: 1 },
-    hidden: { x: 300, opacity: 0 }
+    visible: { y: 0,  opacity: 1 },
+    hidden: { y: -50,  opacity: 0 }
 }
-
 
 function PreviewPost({ id, imageSrc = "/images/article1r.jpg", author = "Unknown", title = "The title", content = "soiejfpaosefijpaoeifjapeofijapeofiajzpeofiazjpefoiazejfpoaziefjpaozeifjpazoeifj opefaijepfoaiezjfpo ijefzpao fiazjep ofiaj" }) {
     const navigate = useNavigate()
@@ -33,16 +32,18 @@ function PreviewPost({ id, imageSrc = "/images/article1r.jpg", author = "Unknown
             initial="hidden"
             animate={inView ? "visible" : "hidden"}
             exit="hidden"
-            bg="tertiary2"
+            bg="blackAlpha.200"
             mb={8}
-            w={700}
-            h={400}
+            maxW={700}
+            minH={450}
             whileHover={{ scale: 1.1 }}
             cursor="pointer"
             onClick={handleClick}
+            boxShadow='5px 5px 4px 2px rgba(113,128,150,0.7)'
+            borderRadius="0"
         >
             <CardHeader>
-                <Heading size='md'>{title}</Heading>
+                <Heading size='lg' fontSize="1.5rem">{title}</Heading>
             </CardHeader>
             <CardBody>
                 <Stack divider={<StackDivider />} spacing='4'>
@@ -52,7 +53,7 @@ function PreviewPost({ id, imageSrc = "/images/article1r.jpg", author = "Unknown
                             boxSize="200px"
 
                         />
-                        <Text pt='2' ml={5} fontSize='sm'>
+                        <Text pt='2' ml={5} fontSize='1rem'>
                             {content}
                         </Text>
                     </Box>
