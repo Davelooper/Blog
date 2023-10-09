@@ -4,12 +4,12 @@ import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { fetchUser } from '../api/user';
 import { fetchPostComments } from '../api/postComments';
-import { Container, HStack, Text, Divider, IconButton } from '@chakra-ui/react';
+import { Container, HStack, Text, Divider, IconButton, Box, Spinner, VStack } from '@chakra-ui/react';
 import ViewComment from '../components/ViewComment';
 import { ArrowBackIcon } from "@chakra-ui/icons";
 import { useNavigate, useLocation } from 'react-router-dom';
-
-
+import NavBar from '../components/NavBar';
+import { generateProfileRandomImageURL } from '../utils/imagesUtils';
 
 function Post() {
     const [post, setPost] = useState({})
@@ -30,10 +30,12 @@ function Post() {
                 if (typeof result === "object" && Object.keys(result).length !== 0) {
                     setPost(result)
                 } else {
-                    console.error("Erreur lors de la récupération des données.")
+                    console.error("Erreur lors de la récupération des données des posts.")
                 }
             }
             fetchPostDataFromApi()
+        } else {
+            console.log("post", post);
         }
     }, [post])
 
@@ -48,7 +50,7 @@ function Post() {
                 if (typeof result === "object" && Object.keys(result).length !== 0) {
                     setUser(result)
                 } else {
-                    console.error("Erreur lors de la récupération des données.")
+                    console.error("Erreur lors de la récupération des données de l'auteur.")
                 }
             }
             fetchUserDataFromApi()
@@ -65,42 +67,62 @@ function Post() {
                 if (typeof result === "object" && Object.keys(result).length !== 0) {
                     setComments(result)
                 } else {
-                    console.error("Erreur lors de la récupération des données.")
+                    console.error("Erreur lors de la récupération des données des commentaires.")
                 }
             }
             fetchCommentsDataFromApi()
         }
     })
 
+    useEffect(() => {
+        const imagePlop = generateProfileRandomImageURL()
+        console.log("imagePlop", imagePlop);
+    })
+
     return (
+        <>
+        <NavBar />
         <Container>
-            <HStack spacing={2} align="center">
+            <HStack mt={30} spacing={2} mb={30} align="center">
                 <IconButton
                     aria-label="Revenir en arrière"
                     icon={<ArrowBackIcon />}
                     onClick={() => navigate(`/`)}
                     size="lg"
-                    colorScheme="teal"
-                    _hover={{
-                        backgroundColor: "gray.500", // Changer la couleur de fond au survol
-                    }}
                 />
                 <Text>Retour aux articles</Text>
             </HStack>
+            {Object.keys(post).length !== 0 && Object.keys(user).length !== 0 ?
+                <ViewPost profileImageSrc={generateProfileRandomImageURL()} imageSrc={imageSrc} title={post.title} content={post.body} author={user.name} />
+                :
+                <Box
+                    display="flex"
+                    alignItems="center"
+                    justifyContent="center"
+                    flexDirection="column"
+                >
+                    <Text mb={4}  fontWeight="bold">Chargement des données de l'auteur</Text>
+                    <Spinner size='xl'  mx="auto" />
+                </Box>
 
-            <ViewPost imageSrc={imageSrc} />
-            <Divider borderWidth="1px" mb="30px" />
+            }
+            <Divider borderWidth="1px" mb={100} mt={30} />
             {comments.length !== 0 && (
-                comments.map((comment) => (
-                    <ViewComment
-                        key={comment.id}
-                        content={comment.body}
-                        email={comment.email}
-                        title={comment.name}
-                    />
-                ))
+                <VStack>
+                    {
+                        comments.map((comment) => (
+                            <ViewComment
+                                key={comment.id}
+                                content={comment.body}
+                                email={comment.email}
+                                title={comment.name}
+                            />
+                        ))
+                    }
+                </VStack>
             )}
         </Container>
+        </>
     );
 }
 

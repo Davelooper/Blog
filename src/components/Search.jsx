@@ -1,5 +1,5 @@
 import React from "react";
-import { Box, Flex, Heading, Input, Select, Text } from "@chakra-ui/react";
+import { Box, Flex, Heading, Input, Select } from "@chakra-ui/react";
 
 
 function Search({ searchText, searchCategory, setSearchText, setSearchCategory }) {
@@ -19,8 +19,8 @@ function Search({ searchText, searchCategory, setSearchText, setSearchCategory }
                     borderWidth="2px"
                     borderColor="tertiary"
                     _focus={{
-                        borderColor: "quaternary", // Couleur de la bordure lorsqu'il est en focus
-                        borderWidth: "2px", // Largeur de la bordure en focus
+                        borderColor: "quaternary", 
+                        borderWidth: "2px", 
                       }}
                 />
 

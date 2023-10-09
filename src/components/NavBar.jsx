@@ -1,7 +1,10 @@
 import React from 'react';
 import { Box, Flex, Link, Text } from '@chakra-ui/react';
+import { useNavigate } from 'react-router-dom';
 
 function NavBar() {
+    const navigate = useNavigate()
+
     return (
         <Flex
             as="nav"
@@ -44,6 +47,7 @@ function NavBar() {
                     <Link
                         mx={2}
                         _hover={{ transform: 'scale(1.1)' }}
+                        onClick={() => navigate("/")}
                     >Accueil</Link>
                     <Link
                         mx={2}

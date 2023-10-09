@@ -37,7 +37,7 @@ const colors = {
 const components = {
     Container: {
         baseStyle: {
-            maxWidth: "80%",
+            maxWidth: "75%",
             p: "10px",
             color: "white",
             mx: "auto",
@@ -77,6 +77,19 @@ const components = {
             boxShadow: '0px 2px 4px rgba(0, 0, 0, 0.1)', 
         },
     },
+    Spinner: {
+        baseStyle: {
+            color: "blackAlpha.700"
+        }
+    },
+    IconButton: {
+        baseStyle: {
+            bg: "rgba(0, 0, 0, 0.64)",
+            _hover: {
+                bg: "gray.500",
+            }
+        }
+    }
 }
 
 const styles = {
